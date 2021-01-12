@@ -1,0 +1,42 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="Db_KitapModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="Tbl_Kategori">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="KategoriAd" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="Tbl_Kitap" Relationship="Self.FK_Tbl_Kitap_Tbl_Kategori" FromRole="Tbl_Kategori" ToRole="Tbl_Kitap" />
+  </EntityType>
+  <EntityType Name="Tbl_Kitap">
+    <Key>
+      <PropertyRef Name="KitapId" />
+    </Key>
+    <Property Name="KitapId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Ad" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Sayfa" Type="String" MaxLength="5" FixedLength="false" Unicode="true" />
+    <Property Name="Yazar" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Kategori" Type="Int32" />
+    <NavigationProperty Name="Tbl_Kategori" Relationship="Self.FK_Tbl_Kitap_Tbl_Kategori" FromRole="Tbl_Kitap" ToRole="Tbl_Kategori" />
+  </EntityType>
+  <Association Name="FK_Tbl_Kitap_Tbl_Kategori">
+    <End Role="Tbl_Kategori" Type="Self.Tbl_Kategori" Multiplicity="0..1" />
+    <End Role="Tbl_Kitap" Type="Self.Tbl_Kitap" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Tbl_Kategori">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="Tbl_Kitap">
+        <PropertyRef Name="Kategori" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="Db_KitapEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="Tbl_Kategori" EntityType="Self.Tbl_Kategori" />
+    <EntitySet Name="Tbl_Kitap" EntityType="Self.Tbl_Kitap" />
+    <AssociationSet Name="FK_Tbl_Kitap_Tbl_Kategori" Association="Self.FK_Tbl_Kitap_Tbl_Kategori">
+      <End Role="Tbl_Kategori" EntitySet="Tbl_Kategori" />
+      <End Role="Tbl_Kitap" EntitySet="Tbl_Kitap" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

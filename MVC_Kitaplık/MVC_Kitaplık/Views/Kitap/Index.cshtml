@@ -1,0 +1,36 @@
+﻿@using MVC_Kitaplık.Models;
+@model List<Tbl_Kitap>
+
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_KitapLayout.cshtml";
+}
+
+<table class="table table-bordered">
+    <tr>
+        <th>ID</th>
+        <th>Kitap Adı</th>
+        <th>Yazarı</th>
+        <th>Sayfa</th>
+        <th>Tür</th>
+        <th>Sil</th>
+        <th>Güncelle</th>
+    </tr>
+    @foreach(var x in Model)
+    {
+<tr>
+    <td>@x.KitapId</td>
+    <td>@x.Ad</td>
+    <td>@x.Yazar</td>
+    <td>@x.Sayfa</td>
+    <td>@x.Tbl_Kategori.KategoriAd</td>
+    <td><a href="/Kitap/Kitapsil/@x.KitapId" class="btn btn-danger">Sil </a></td>
+    <td><a href="/Kitap/KitapGetir/@x.KitapId" class="btn btn-warning">Güncelle </a></td>
+
+</tr>
+    }
+</table>
+
+<a href="/Kitap/KitapEkle" class="btn btn-primary">Yeni Kitap</a>
+

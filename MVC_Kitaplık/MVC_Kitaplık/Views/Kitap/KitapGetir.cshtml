@@ -1,0 +1,28 @@
+﻿@model MVC_Kitaplık.Models.Tbl_Kitap
+@{
+    ViewBag.Title = "KitapGuncelle";
+    Layout = "~/Views/Shared/_KitapLayout.cshtml";
+}
+
+@using (Html.BeginForm("KitapGuncelle", "Kitap", FormMethod.Post))
+{
+    <div style="margin-bottom:15px">
+        @Html.HiddenFor(y=>y.KitapId)
+        @Html.LabelFor(x => x.Ad)
+        @Html.TextBoxFor(x => x.Ad, new { @class = "form-control" })
+    </div>
+    <div style="margin-bottom:15px">
+        @Html.LabelFor(x => x.Yazar)
+        @Html.TextBoxFor(x => x.Yazar, new { @class = "form-control" })
+    </div>
+    <div style="margin-bottom:15px">
+        @Html.LabelFor(x => x.Sayfa)
+        @Html.TextBoxFor(x => x.Sayfa, new { @class = "form-control" })
+    </div>
+    <div style="margin-bottom:15px">
+        @Html.LabelFor(x => x.Kategori)
+        @Html.TextBoxFor(x => x.Kategori, new { @class = "form-control" })
+    </div>
+    <button class="btn btn-success">Güncelle</button>
+}
+
